@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizWiz - Test Your Knowledge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/logo.png') }}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    {% include "header.html" %}
+
+    <main class="md:my-20 my-10 mx-10 md:mx-28">
+        <div class="p-2.5 rounded-lg catergory-border my-0 mx-auto text-center md:w-48">
+            <h1 class="uppercase black text-2xl font-bold">leaderboard</h1>
+        </div>
+        <section class="mt-10 overflow-auto rounded shadow-md p-6">
+            <table class="leaderboard-table table-auto md:table-fixed w-full">
+                <thead class="border-collapse border-b">
+                    <tr class="text-left">
+                        <th class="md:p-0 p-2">RANK</th>
+                        <th class="md:p-0 p-2">PLAYER</th>
+                        <th class="md:p-0 p-2">SCORE</th>
+                        <th class="md:p-0 p-2">PLAYS</th>
+                        <th class="md:whitespace-nowrap uppercase md:p-0 p-2">Most Frequent Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for idx, user in enumerated_leaderboard %}
+                    <tr>
+                        <td>{{ idx }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.total_score }}</td>
+                        <td>{{ user.user_score_count }}</td>
+                        <td>{{ user.most_played_category }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>                      
+        </section>
+    </main>
+
+    {% include "footer.html" %}
+
+    <script src="../static/js/hamburger.js"></script>
+    <script src="../static/js/leaderboard.js"></script>
+
+
+</body>
+</html>
